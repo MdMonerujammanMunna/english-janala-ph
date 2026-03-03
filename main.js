@@ -27,10 +27,21 @@ const reomoveActive = () => {
     });
 }
 
-
+// Loading function
+const Loading = (statues) => {
+    if (statues == true) {
+        document.getElementById("Loading-section").classList.remove("hidden")
+        document.getElementById("word-continer").classList.add("hidden")
+    }
+    else {
+        document.getElementById("word-continer").classList.remove("hidden")
+        document.getElementById("Loading-section").classList.add("hidden")
+    }
+}
 // word see:- 
 
 const wordSee = (id) => {
+    Loading(true)
     fetch(`https://openapi.programming-hero.com/api/level/${id}`)
         .then(res => res.json())
         .then(valu => {
@@ -68,9 +79,14 @@ const displayWordSee = (word) => {
         </div>`
         WordContiner.appendChild(wordDiv)
     });
+    Loading(false)
 }
 
-
+// synonym function:- 
+const synonymes = (array) => {
+    const htmlSynonymes = array.map(el => ` <span class="btn bg-[#1A91FF10] outline-none mr-[18px]  hover:bg-primary hover:text-white">${el}</span>`)
+    return (htmlSynonymes.join(" "))
+}
 // add word Details
 const WordDetailID = async (id) => {
     let url = `https://openapi.programming-hero.com/api/word/${id}`
@@ -95,10 +111,8 @@ const WordDetailShow = (array) => {
                 </div>
                 <div class="">
                     <h2 class="font-semibold mb-2">সমার্থক শব্দ গুলো</h2>
-                    <span
-                        class="btn  bg-[#1A91FF10] outline-none mr-[18px]  hover:bg-primary hover:text-white">${array.synonyms[0] ? array.synonyms[0] : "Not Found"}</span>
-                    <span class="btn bg-[#1A91FF10] outline-none mr-[18px]  hover:bg-primary hover:text-white">${array.synonyms[1] ? array.synonyms[1] : "Not Found"}</span>
-                    <span class="btn bg-[#1A91FF10] outline-none  hover:bg-primary hover:text-white">${array.synonyms[2] ? array.synonyms[2] : "Not Found"}</span>
+                    <div>
+                    ${synonymes(array.synonyms)}</div>
                 </div>`
     document.getElementById("WordModal").showModal()
 }
