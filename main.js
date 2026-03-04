@@ -122,3 +122,18 @@ const WordDetailShow = (array) => {
                 </div>`
     document.getElementById("WordModal").showModal()
 }
+
+// search function
+document.getElementById("btn-search").addEventListener("click", function intSrc(input) {
+    reomoveActive()
+    let valu = document.getElementById("input-search")
+    const srcValu = valu.value.trim().toLowerCase()
+    fetch("https://openapi.programming-hero.com/api/words/all")
+        .then(res => res.json())
+        .then(values => {
+            const allword = values.data
+            const filterWord = allword.filter((word => word.word.toLowerCase().includes(srcValu)))
+            displayWordSee(filterWord)
+        });
+    // valu.value = ""
+})
