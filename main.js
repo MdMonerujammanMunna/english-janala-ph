@@ -1,3 +1,9 @@
+//Speaker function
+function pronounceWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = "en-EN"; // English
+    window.speechSynthesis.speak(utterance);
+}
 // lesson level :-
 const loadLessons = () => {
     fetch("https://openapi.programming-hero.com/api/levels/all")
@@ -73,7 +79,7 @@ const displayWordSee = (word) => {
             <div class="flex justify-between items-center">
                 <button onclick="WordDetailID(${element.id})" class="btn bg-[#1A91FF10] outline-none  hover:bg-primary hover:text-white"> <i
                         class="fa-solid fa-circle-info "></i></button>
-                <button class="btn  bg-[#1A91FF10] outline-none  hover:bg-primary hover:text-white"> <i
+                <button onclick="pronounceWord('${element.word}')" class="btn  bg-[#1A91FF10] outline-none  hover:bg-primary hover:text-white"> <i
                         class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>`
