@@ -135,5 +135,4 @@ document.getElementById("btn-search").addEventListener("click", function intSrc(
             const filterWord = allword.filter((word => word.word.toLowerCase().includes(srcValu)))
             displayWordSee(filterWord)
         });
-    // valu.value = ""
 })
